@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;IS_UNITY</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;IS_UNITY</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\CommonFiles\PrismFormsTestBase.cs" Link="PrismFormsTestBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="Prism.Unity.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ease.NUnit.Unity\Ease.NUnit.Unity.csproj" />
+  </ItemGroup>
+
+</Project>
