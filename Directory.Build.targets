@@ -1,0 +1,32 @@
+    
+<Project>
+
+    <Target Name="_ReleaseBinaryCopy"
+            Condition=" !'$(IsTestProject)' And '$(IsPackable)' "
+            BeforeTargets="AfterBuild">
+
+        <PropertyGroup>
+            <!-- <BinariesFolderName>Nunit</BinariesFolderName>
+            <BinariesFolderName Condition=" '$(IsUnityProject)' ">Unity</BinariesFolderName>
+            <BinariesFolderName Condition=" '$(IsDryIocProject)' ">DryIoc</BinariesFolderName>
+            <BinariesFolderName Condition=" '$(IsPrismFormsProject)' ">$(BinariesFolderName).PrismForms</BinariesFolderName> -->
+			<BinariesFolderName>$(AssemblyName)</BinariesFolderName>
+            <ArtifactStaging>$([System.IO.Path]::Combine('$(ArtifactStagingRoot)', $(Configuration), '$(BinariesFolderName)', '$(TargetFramework)'))</ArtifactStaging>
+        </PropertyGroup>
+
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll"
+              DestinationFolder="$(ArtifactStaging)"
+              Condition=" Exists('$(OutputPath)$(AssemblyName).dll') " />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).xml"
+              DestinationFolder="$(ArtifactStaging)"
+              Condition=" Exists('$(OutputPath)$(AssemblyName).xml') " />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).pdb"
+              DestinationFolder="$(ArtifactStaging)"
+              Condition=" Exists('$(OutputPath)$(AssemblyName).pdb') " />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).pri"
+              DestinationFolder="$(ArtifactStaging)"
+              Condition=" Exists('$(OutputPath)$(AssemblyName).pri') " />
+
+    </Target>
+
+</Project>

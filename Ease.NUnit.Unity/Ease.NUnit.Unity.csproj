@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+
+  	<AssemblyName>Ease.NUnit.Unity</AssemblyName>
+    <PackageId>Ease.NUnit.Unity</PackageId>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <Version Condition=" '$(EASE_RELEASE)' != '' ">$(EASE_RELEASE)</Version>
+    <Version Condition=" '$(EASE_RELEASE)' == '' ">0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

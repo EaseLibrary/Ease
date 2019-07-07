@@ -1,0 +1,60 @@
+<Project>
+
+  <PropertyGroup>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Authors>Duane Newman</Authors>
+    <Owners>Duane Newman</Owners>
+    <!-- <PackageIconUrl></PackageIconUrl> -->
+    <PackageProjectUrl>https://github.com/easelib/easelib</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <PackageReleaseNotes Condition=" '$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)' != '' And '$(PackageReleaseNotes)' == '' ">$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/easelib/easelib</RepositoryUrl>
+    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSource>True</IncludeSource>
+    <ArtifactStagingRoot>$(MSBuildThisFileDirectory)Artifacts</ArtifactStagingRoot>
+    <ArtifactStagingRoot Condition=" '$(BUILD_ARTIFACTSTAGINGDIRECTORY)' != '' ">$(BUILD_ARTIFACTSTAGINGDIRECTORY)</ArtifactStagingRoot>
+    <PackageOutputPath>$([System.IO.Path]::Combine('$(ArtifactStagingRoot)', 'NuGet'))</PackageOutputPath>
+
+    <IsTestProject>$(MSBuildProjectName.Contains('Tests'))</IsTestProject>
+
+    <IsUnityProject>$(MSBuildProjectName.Contains('Unity'))</IsUnityProject>
+    <IsDryIocProject>$(MSBuildProjectName.Contains('DryIoc'))</IsDryIocProject>
+    <IsPrismFormsProject>$(MSBuildProjectName.Contains('PrismForms'))</IsPrismFormsProject>
+
+    <!-- <SignAssembly Condition="">True</SignAssembly> -->
+    <!-- <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)easelib.snk</AssemblyOriginatorKeyFile> -->
+    <DelaySign>False</DelaySign>
+
+    <IsPackable>!$(IsTestProject)</IsPackable>
+    <PackageTags>nunit;ioc;testing;unit testing;moq;mock;dependency injection;di</PackageTags>
+    <PackageTags Condition=" '$(IsUnityProject)' == 'True' ">$(PackageTags);unity</PackageTags>
+    <PackageTags Condition=" '$(IsDryIocProject)' == 'True' ">$(PackageTags);dryioc</PackageTags>
+    <PackageTags Condition=" '$(IsPrismFormsProject)' == 'True' ">$(PackageTags);prism;mvvm;android;ios;xamarin;xamarin.forms</PackageTags>
+    <IS_PREVIEW Condition=" '$(IS_PREVIEW)' == '' ">false</IS_PREVIEW>
+    <IS_RELEASE Condition=" '$(IS_RELEASE)' == '' ">false</IS_RELEASE>
+  </PropertyGroup>
+
+  <!-- <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <GenerateDocumentationFile>!$(IsTestProject)</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>!$(IsTestProject)</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
+  </PropertyGroup> -->
+
+    <!-- Nuget source link -->
+  <!-- <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup Condition=" !$(IsTestProject) ">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
+  </ItemGroup> -->
+
+</Project>
