@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ease.NUnit.DryIoc.PrismForm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ease.NUnit.DryIoc.PrismForms.Tests", "Ease.NUnit.DryIoc.PrismForms.Tests\Ease.NUnit.DryIoc.PrismForms.Tests.csproj", "{72ACEF64-3812-4C9C-84C7-EEB88FC52B40}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ease.MsTest", "Ease.MsTest\Ease.MsTest.csproj", "{3B5DE91B-0B2F-444D-B476-0DAB711239A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ease.MsTest.Tests", "Ease.MsTest.Tests\Ease.MsTest.Tests.csproj", "{3B5DE91B-0B2F-444D-B476-0DAB711239A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ease.NUnit.Unity", "Ease.NUnit.Unity\Ease.NUnit.Unity.csproj", "{E0B29BBB-7091-4CEC-8F8C-E3A5CC1CA75F}"
 EndProject

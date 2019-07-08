@@ -6,13 +6,13 @@
     <Authors>Duane Newman</Authors>
     <Owners>Duane Newman</Owners>
     <!-- <PackageIconUrl></PackageIconUrl> -->
-    <PackageProjectUrl>https://github.com/easelib/easelib</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/EaseLibrary</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
     <PackageReleaseNotes Condition=" '$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)' != '' And '$(PackageReleaseNotes)' == '' ">$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/easelib/easelib</RepositoryUrl>
+    <RepositoryUrl>https://github.com/EaseLibrary/Ease</RepositoryUrl>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
     <ArtifactStagingRoot>$(MSBuildThisFileDirectory)Artifacts</ArtifactStagingRoot>
@@ -30,7 +30,7 @@
     <DelaySign>False</DelaySign>
 
     <IsPackable>!$(IsTestProject)</IsPackable>
-    <PackageTags>nunit;ioc;testing;unit testing;moq;mock;dependency injection;di</PackageTags>
+    <PackageTags>ease;easelib;nunit;ioc;testing;unit testing;moq;mock;dependency injection;di</PackageTags>
     <PackageTags Condition=" '$(IsUnityProject)' == 'True' ">$(PackageTags);unity</PackageTags>
     <PackageTags Condition=" '$(IsDryIocProject)' == 'True' ">$(PackageTags);dryioc</PackageTags>
     <PackageTags Condition=" '$(IsPrismFormsProject)' == 'True' ">$(PackageTags);prism;mvvm;android;ios;xamarin;xamarin.forms</PackageTags>

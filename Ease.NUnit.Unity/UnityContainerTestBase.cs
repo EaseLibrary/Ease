@@ -22,30 +22,29 @@ namespace Ease.NUnit.Unity
 			});
 		}
 
-		protected void RegisterResettableType<T>()
+		private void RegisterResettableType<T>()
 		{
 			Container.RegisterType<T>(new ResettableLifetimeManager(Resetter));
 		}
 
-		protected void RegisterResettableType<TInterface, TImplementation>()
+		private void RegisterResettableType<TInterface, TImplementation>() where TImplementation : TInterface
 		{
-			Container.RegisterType(typeof(TInterface), typeof(TImplementation), string.Empty, new ResettableLifetimeManager(Resetter), null);
-//			UnityContainerExtensions.RegisterType<TInterface, TImplementation>(Container, (new ResettableLifetimeManager(Resetter)) as LifetimeManager, injectionMembers);
+			Container.RegisterType<TInterface, TImplementation>(new ResettableLifetimeManager(Resetter));
 		}
 
-		protected void RegisterResettableTypeFactory<T>(Func<T> factory)
+		private void RegisterResettableTypeFactory<T>(Func<T> factory)
 		{
-			RegisterResettableType<T>(new InjectionFactory(c => factory()));
+			RegisterResettableType<T>(factory);
 		}
 
-		protected void RegisterResettableType<T>(params InjectionMember[] injectionMembers)
+		private void RegisterResettableType<T>(Func<T> factory)
 		{
-			Container.RegisterType<T>(new ResettableLifetimeManager(Resetter), injectionMembers);
+			Container.RegisterFactory<T>(c => factory(), new ResettableLifetimeManager(Resetter));
 		}
 
 		protected override void RegisterMockType<T>(Func<Action<Mock<T>>> onCreatedCallbackFactory)
 		{
-			RegisterResettableType<T>(new InjectionFactory(c => CreateAndInitializeMockInstance(onCreatedCallbackFactory)));
+			RegisterResettableType<T>(() => CreateAndInitializeMockInstance(onCreatedCallbackFactory));
 		}
 
 		private static T CreateAndInitializeMockInstance<T>(Func<Action<Mock<T>>> onMockInstanceCreatedFactory) where T : class
@@ -76,13 +75,6 @@ namespace Ease.NUnit.Unity
 			return Container.Resolve<T>();
 		}
 
-		protected void ValidateMock<T>(Action<Mock<T>> validationAction) where T : class
-		{
-			var instance = ResolveType<T>();
-			var mock = Mock.Get(instance);
-			validationAction(mock);
-		}
-
 		protected class LifetimeResetter
 		{
 			public Action OnReset;
@@ -93,11 +85,16 @@ namespace Ease.NUnit.Unity
 			}
 		}
 
-		protected class ResettableLifetimeManager : LifetimeManager
+		protected class ResettableLifetimeManager : 
+			LifetimeManager,
+			IInstanceLifetimeManager, 
+			ITypeLifetimeManager, 
+			IFactoryLifetimeManager
 		{
-			private LifetimeResetter LifetimeResetter { get; }
 
-			private object instance;
+			protected object instance = NoValue;
+
+			private LifetimeResetter LifetimeResetter { get; }
 
 			public ResettableLifetimeManager(LifetimeResetter lifetimeResetter)
 			{
@@ -112,7 +109,7 @@ namespace Ease.NUnit.Unity
 
 			public override void RemoveValue(ILifetimeContainer container = null)
 			{
-				instance = null;
+				instance = NoValue;
 			}
 
 			public override object GetValue(ILifetimeContainer container = null)
@@ -125,7 +122,5 @@ namespace Ease.NUnit.Unity
 				return new ResettableLifetimeManager(LifetimeResetter);
 			}
 		}
-
-
 	}
 }

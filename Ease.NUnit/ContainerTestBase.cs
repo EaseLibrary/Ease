@@ -38,5 +38,12 @@ namespace Ease.NUnit
 			var mock = Mock.Get<T>(instance);
 			return mock;
 		}
+
+		protected void ValidateMock<T>(Action<Mock<T>> validationAction) where T : class
+		{
+			var instance = ResolveType<T>();
+			var mock = Mock.Get(instance);
+			validationAction(mock);
+		}
 	}
 }

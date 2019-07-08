@@ -55,12 +55,5 @@ namespace Ease.NUnit.DryIoc
 		{
 			return ScopeContext.Resolve<T>();
 		}
-
-		protected void ValidateMock<T>(Action<Mock<T>> validationAction) where T : class
-		{
-			var instance = ResolveType<T>();
-			var mock = Mock.Get(instance);
-			validationAction(mock);
-		}
 	}
 }
