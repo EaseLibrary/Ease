@@ -134,12 +134,12 @@ namespace Ease.NUnit.Unity.PrismForms
 			return navParams;
 		}
 
-		protected async Task<T> ResolveAndCallOnNavigatedToAsync<T>(NavigationMode navigationMode, params KeyValuePair<string, object>[] parameters)
-			where T : BindableBase, INavigatedAwareAsync
+		protected T ResolveAndCallOnNavigatedTo<T>(NavigationMode navigationMode, params KeyValuePair<string, object>[] parameters)
+			where T : BindableBase,  INavigatedAware
 		{
 			var vm = ResolveType<T>();
 			var navParams = CreateNavigationParameters(navigationMode, parameters);
-			await vm.OnNavigatedToAsync(navParams);
+			vm.OnNavigatedTo(navParams);
 			return vm;
 		}
 	}
