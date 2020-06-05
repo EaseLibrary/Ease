@@ -7,14 +7,11 @@
     <PackageId>Ease.NUnit.Unity.PrismForms</PackageId>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;IS_UNITY</DefineConstants>
+    <DefineConstants>IS_UNITY;IS_NUNIT</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;IS_UNITY;IS_NUNIT</DefineConstants>
+    <DefineConstants>TRACE;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

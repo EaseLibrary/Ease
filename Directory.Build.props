@@ -34,20 +34,21 @@
     <PackageTags Condition=" '$(IsUnityProject)' == 'True' ">$(PackageTags);unity</PackageTags>
     <PackageTags Condition=" '$(IsDryIocProject)' == 'True' ">$(PackageTags);dryioc</PackageTags>
     <PackageTags Condition=" '$(IsPrismFormsProject)' == 'True' ">$(PackageTags);prism;mvvm;android;ios;xamarin;xamarin.forms</PackageTags>
-    <IS_RELEASE Condition=" '$(IS_RELEASE)' == '' ">false</IS_RELEASE>
 
     <IS_PREVIEW Condition="'$(IS_PREVIEW)'=='' AND '$(APPVEYOR_PULL_REQUEST_NUMBER)'!=''">true</IS_PREVIEW>
     <IS_PREVIEW Condition=" '$(IS_PREVIEW)' == '' ">false</IS_PREVIEW>
 
-    <IS_TAGGED Condition=" '$(IS_TAGGED)' != '' AND '$(APPVEYOR_REPO_TAG)' != '' ">$(APPVEYOR_REPO_TAG)</IS_TAGGED>
+    <IS_TAGGED Condition=" '$(IS_TAGGED)' == '' AND '$(APPVEYOR_REPO_TAG)' != '' ">$(APPVEYOR_REPO_TAG)</IS_TAGGED>
     <IS_TAGGED Condition=" '$(IS_TAGGED)' == '' ">false</IS_TAGGED>
+
+    <IS_RELEASE Condition=" '$(IS_TAGGED)' != '' AND '$(IS_TAGGED)' ">true</IS_RELEASE>
+    <IS_RELEASE Condition=" '$(IS_RELEASE)' == '' ">false</IS_RELEASE>
 
   </PropertyGroup>
 
 <!-- Versioning -->
   <PropertyGroup>
-    <EASE_RELEASE Condition=" '$(EASE_RELEASE)' == '' AND '$(IS_TAGGED)' AND '$(APPVEYOR_REPO_TAG_NAME)' != '' ">$(APPVEYOR_REPO_TAG_NAME)</EASE_RELEASE>
-
+    <Version Condition=" '$(EASE_RELEASE)' == '' AND '$(IS_TAGGED)' AND '$(APPVEYOR_REPO_TAG_NAME)' != '' ">$(APPVEYOR_REPO_TAG_NAME)</Version>
     <Version Condition=" '$(EASE_RELEASE)' != '' ">$(EASE_RELEASE)</Version>
     <!-- Update this version when incrementing Library Versions -->
     <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' ">0.3.0</VersionPrefix>
