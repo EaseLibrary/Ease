@@ -7,11 +7,11 @@
     <PackageId>Ease.NUnit.Unity</PackageId>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DefineConstants>IS_UNITY;IS_NUNIT</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="Unity.Container" Version="5.11.7" />
   </ItemGroup>
 
   <ItemGroup>
