@@ -1,16 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;IS_UNITY;IS_NUNIT</DefineConstants>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;IS_UNITY;IS_NUNIT</DefineConstants>
+    <DefineConstants>TRACE;IS_UNITY;IS_XUNIT</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,18 +18,19 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="Prism.Unity.Forms" Version="7.2.0.1422" />
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="1.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ease.NUnit.Unity.PrismForms\Ease.NUnit.Unity.PrismForms.csproj" />
+    <ProjectReference Include="..\Ease.XUnit.Unity.PrismForms\Ease.XUnit.Unity.PrismForms.csproj" />
   </ItemGroup>
 
 </Project>

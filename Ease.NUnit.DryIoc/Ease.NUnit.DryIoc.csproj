@@ -13,14 +13,17 @@
 
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="DryIoc.dll" Version="4.0.7" />
-    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="DryIoc.dll" Version="4.1.4" />
     <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ease.NUnit\Ease.NUnit.csproj" />
+    <ProjectReference Include="..\Ease.DryIoc\Ease.DryIoc.csproj" />
   </ItemGroup>
 
 </Project>

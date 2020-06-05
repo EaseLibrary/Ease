@@ -1,35 +1,40 @@
-﻿using System;
-using Moq;
+﻿using Moq;
+using System;
 using Unity;
-using Unity.Injection;
 using Unity.Lifetime;
-using Unity.Registration;
 
-namespace Ease.NUnit.Unity
+namespace Ease.Unity
 {
-	public class UnityContainerTestBase : ContainerTestBase
+	public abstract class UnityContainerTestBase : ContainerTestBase
 	{
-		protected UnityContainer Container;
-		protected LifetimeResetter Resetter { get; set; }
+		private UnityContainer Container;
+		private LifetimeResetter Restter { get; set; }
 
 		public UnityContainerTestBase()
 		{
-			Resetter = new LifetimeResetter();
+			CreateContainer();
+			RegisterTypes();
+		}
+
+		protected override void CreateContainer()
+		{
+			Restter = new LifetimeResetter();
 			Container = new UnityContainer();
-			RegisterPerTestSetup(() => 
-			{
-				Resetter.Reset();
-			});
+		}
+
+		protected void ResetLifetime()
+        {
+			Restter.Reset();
 		}
 
 		private void RegisterResettableType<T>()
 		{
-			Container.RegisterType<T>(new ResettableLifetimeManager(Resetter));
+			Container.RegisterType<T>(new ResettableLifetimeManager(Restter));
 		}
 
 		private void RegisterResettableType<TInterface, TImplementation>() where TImplementation : TInterface
 		{
-			Container.RegisterType<TInterface, TImplementation>(new ResettableLifetimeManager(Resetter));
+			Container.RegisterType<TInterface, TImplementation>(new ResettableLifetimeManager(Restter));
 		}
 
 		private void RegisterResettableTypeFactory<T>(Func<T> factory)
@@ -39,7 +44,7 @@ namespace Ease.NUnit.Unity
 
 		private void RegisterResettableType<T>(Func<T> factory)
 		{
-			Container.RegisterFactory<T>(c => factory(), new ResettableLifetimeManager(Resetter));
+			Container.RegisterFactory<T>(c => factory(), new ResettableLifetimeManager(Restter));
 		}
 
 		protected override void RegisterMockType<T>(Func<Action<Mock<T>>> onCreatedCallbackFactory)

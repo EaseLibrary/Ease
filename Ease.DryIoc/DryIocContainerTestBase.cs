@@ -1,26 +1,35 @@
-﻿using System;
-using DryIoc;
+﻿using DryIoc;
 using Moq;
+using System;
 
-namespace Ease.NUnit.DryIoc
+namespace Ease.DryIoc
 {
-	public class DryIocContainerTestBase : ContainerTestBase
+    public abstract class DryIocContainerTestBase : ContainerTestBase
 	{
 		private Container Container;
 		private IResolverContext ScopeContext;
 
 		protected DryIocContainerTestBase()
 		{
+			CreateContainer();
+			RegisterTypes();
+		}
+
+		protected override void CreateContainer()
+		{
 			var rules = Rules.Default
 				.WithConcreteTypeDynamicRegistrations()
 				.WithTrackingDisposableTransients()
 				.WithDefaultReuse(new CurrentScopeReuse());
+
 			Container = new Container(rules);
-			RegisterPerTestSetup(() =>
-			{
-				ScopeContext?.Dispose();
-				ScopeContext = Container.OpenScope();
-			});
+			ScopeContext = Container.OpenScope();
+		}
+
+		protected void ResetLifetime()
+        {
+			ScopeContext?.Dispose();
+			ScopeContext = Container.OpenScope();
 		}
 
 		protected override void RegisterType<T>()
