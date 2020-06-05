@@ -51,7 +51,7 @@
     <Version Condition=" '$(EASE_RELEASE)' == '' AND '$(IS_TAGGED)' AND '$(APPVEYOR_REPO_TAG_NAME)' != '' ">$(APPVEYOR_REPO_TAG_NAME)</Version>
     <Version Condition=" '$(EASE_RELEASE)' != '' ">$(EASE_RELEASE)</Version>
     <!-- Update this version when incrementing Library Versions -->
-    <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' ">0.3.0</VersionPrefix>
+    <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' ">0.4.0</VersionPrefix>
     <VersionSuffix>ci</VersionSuffix>
     <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' And '$(APPVEYOR_PULL_REQUEST_NUMBER)' != '' ">$(VersionPrefix).$(APPVEYOR_PULL_REQUEST_NUMBER)</VersionPrefix>
     <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_PREVIEW)' ">pre</VersionSuffix>
