@@ -34,9 +34,28 @@
     <PackageTags Condition=" '$(IsUnityProject)' == 'True' ">$(PackageTags);unity</PackageTags>
     <PackageTags Condition=" '$(IsDryIocProject)' == 'True' ">$(PackageTags);dryioc</PackageTags>
     <PackageTags Condition=" '$(IsPrismFormsProject)' == 'True' ">$(PackageTags);prism;mvvm;android;ios;xamarin;xamarin.forms</PackageTags>
-    <IS_PREVIEW Condition=" '$(IS_PREVIEW)' == '' ">false</IS_PREVIEW>
     <IS_RELEASE Condition=" '$(IS_RELEASE)' == '' ">false</IS_RELEASE>
+
+    <IS_PREVIEW Condition="'$(IS_PREVIEW)'=='' AND '$(APPVEYOR_PULL_REQUEST_NUMBER)'!=''">true</IS_PREVIEW>
+    <IS_PREVIEW Condition=" '$(IS_PREVIEW)' == '' ">false</IS_PREVIEW>
+
   </PropertyGroup>
+
+<!-- Versioning -->
+  <PropertyGroup>
+
+    <Version Condition=" '$(EASE_RELEASE)' != '' ">$(EASE_RELEASE)</Version>
+    <!-- Update this version when incrementing Library Versions -->
+    <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' ">0.3.0</VersionPrefix>
+    <VersionSuffix>ci</VersionSuffix>
+    <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' And '$(APPVEYOR_PULL_REQUEST_NUMBER)' != '' ">$(VersionPrefix).$(APPVEYOR_PULL_REQUEST_NUMBER)</VersionPrefix>
+    <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_PREVIEW)' ">pre</VersionSuffix>
+    <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_RELEASE)' "></VersionSuffix>
+    <PackageReleaseNotes Condition=" '$(VersionSuffix)' == 'pre' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(VersionPrefix)-pre</PackageReleaseNotes>
+    <PackageReleaseNotes Condition=" '$(VersionSuffix)' == '' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(VersionPrefix)</PackageReleaseNotes>
+    <PackageReleaseNotes Condition=" '$(Version)' != '' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(Version)</PackageReleaseNotes>
+  </PropertyGroup>
+
 
   <!-- <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <GenerateDocumentationFile>!$(IsTestProject)</GenerateDocumentationFile>

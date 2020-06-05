@@ -1,0 +1,30 @@
+version: 0.3.{build}
+
+pull_requests:
+  do_not_increment_build_number: true
+  
+image: Visual Studio 2019
+before_build:
+- ps: dotnet restore
+build:
+  verbosity: minimal
+
+artifacts:
+- path: .\Artifacts\NuGet\*.nupkg
+  name: nugets
+
+branches:
+  only:
+  - master
+
+skip_commits:
+  files:
+    - '**\*.md'
+
+nuget:
+  disable_publish_on_pr: true
+  account_feed: false
+  project_feed: true
+
+#build_script:
+#  - ps: .\BuildAll.ps1
