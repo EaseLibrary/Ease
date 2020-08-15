@@ -55,10 +55,10 @@
     <BuildNumber Condition=" '$(BuildNumber)' == '' And '$(APPVEYOR_BUILD_NUMBER)' != '' ">$(APPVEYOR_BUILD_NUMBER)</BuildNumber>
     <BuildNumber Condition=" '$(BuildNumber)' == ''">0</BuildNumber>
     <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' ">$(VersionPrefixBase).$(BuildNumber)</VersionPrefix>
-    <VersionSuffix>ci</VersionSuffix>
-    <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' And '$(APPVEYOR_PULL_REQUEST_NUMBER)' != '' ">$(VersionPrefix).$(APPVEYOR_PULL_REQUEST_NUMBER)</VersionPrefix>
-    <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_PREVIEW)' ">pre</VersionSuffix>
-    <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_RELEASE)' "></VersionSuffix>
+
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' And '$(APPVEYOR_PULL_REQUEST_NUMBER)' != '' ">pr$(APPVEYOR_PULL_REQUEST_NUMBER)</VersionSuffix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' And '$(APPVEYOR_REPO_BRANCH)' != '' ">$(APPVEYOR_REPO_BRANCH)</VersionSuffix>
+    <!-- <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_RELEASE)' "></VersionSuffix> -->
     <PackageReleaseNotes Condition=" '$(VersionSuffix)' == 'pre' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(VersionPrefix)-pre</PackageReleaseNotes>
     <PackageReleaseNotes Condition=" '$(VersionSuffix)' == '' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(VersionPrefix)</PackageReleaseNotes>
     <PackageReleaseNotes Condition=" '$(Version)' != '' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(Version)</PackageReleaseNotes>
