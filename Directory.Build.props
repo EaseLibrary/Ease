@@ -5,9 +5,9 @@
     <NeutralLanguage>en</NeutralLanguage>
     <Authors>Duane Newman</Authors>
     <Owners>Duane Newman</Owners>
-    <!-- <PackageIconUrl></PackageIconUrl> -->
-    <PackageProjectUrl>https://github.com/EaseLibrary</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>easelibrary-logo-256.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/EaseLibrary/Ease</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
     <PackageReleaseNotes Condition=" '$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)' != '' And '$(PackageReleaseNotes)' == '' ">$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)</PackageReleaseNotes>
@@ -61,24 +61,15 @@
     <PackageReleaseNotes Condition=" '$(Version)' != '' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(Version)</PackageReleaseNotes>
   </PropertyGroup>
 
-
-  <!-- <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <GenerateDocumentationFile>!$(IsTestProject)</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>!$(IsTestProject)</GeneratePackageOnBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <DefineConstants>$(DefineConstants);__ANDROID__</DefineConstants>
-  </PropertyGroup> -->
-
-    <!-- Nuget source link -->
-  <!-- <PropertyGroup>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
-  <ItemGroup Condition=" !$(IsTestProject) ">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
-  </ItemGroup> -->
+  <ItemGroup Condition=" $(IsPackable) ">
+    <None Include="$(MSBuildThisFileDirectory)logos/$(PackageIcon)"
+          Visible="False"
+          Pack="True"
+          PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)$(PackageLicenseFile)"
+          Visible="False"
+          Pack="True"
+          PackagePath="" />
+  </ItemGroup>
 
 </Project>

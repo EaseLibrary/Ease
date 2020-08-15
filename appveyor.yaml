@@ -1,7 +1,7 @@
 version: 0.4.{build}
 
 pull_requests:
-  do_not_increment_build_number: true
+  do_not_increment_build_number: false
   
 image: Visual Studio 2019
 before_build:
@@ -10,7 +10,7 @@ build:
   verbosity: minimal
 
 artifacts:
-- path: .\Artifacts\NuGet\*.nupkg
+- path: Artifacts\NuGet\*.nupkg
   name: nugets
 
 branches:
@@ -26,5 +26,10 @@ nuget:
   account_feed: false
   project_feed: true
 
-#build_script:
-#  - ps: .\BuildAll.ps1
+deploy:
+- provider: NuGet
+  api_key:
+    secure: j/i7K4TBOarCsC9rrzZSfTt8ww/51HtYutI0w2mnAcELOuqpQvkLRIDCoaPYYm++
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true

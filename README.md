@@ -6,6 +6,10 @@ Ease supports both [NUnit](https://github.com/nunit) & [XUnit](https://github.co
 
 Our philosophy is to embrace the magic of DI and the IoC containers that we are already using in our app development to make testing easier to write and manage. 
 
+# Build Status
+
+[![Build status](https://ci.appveyor.com/api/projects/status/py04o4modm9xg03k/branch/master?svg=true)](https://ci.appveyor.com/project/duanenewman/ease/branch/master)
+
 # Installation
 
 You can install the libraries from [Nuget.org](https://www.nuget.org/profiles/EaseLibrary):
