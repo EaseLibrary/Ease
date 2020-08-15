@@ -57,7 +57,7 @@
     <VersionPrefix Condition=" '$(EASE_RELEASE)' == '' ">$(VersionPrefixBase).$(BuildNumber)</VersionPrefix>
 
     <VersionSuffix Condition=" '$(VersionSuffix)' == '' And '$(APPVEYOR_PULL_REQUEST_NUMBER)' != '' ">pr$(APPVEYOR_PULL_REQUEST_NUMBER)</VersionSuffix>
-    <VersionSuffix Condition=" '$(VersionSuffix)' == '' And '$(APPVEYOR_REPO_BRANCH)' != '' ">$(APPVEYOR_REPO_BRANCH)</VersionSuffix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' And '$(APPVEYOR_REPO_BRANCH)' != 'master' ">$(APPVEYOR_REPO_BRANCH)</VersionSuffix>
     <!-- <VersionSuffix Condition=" '$(EASE_RELEASE)' == '' And '$(IS_RELEASE)' "></VersionSuffix> -->
     <PackageReleaseNotes Condition=" '$(VersionSuffix)' == 'pre' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(VersionPrefix)-pre</PackageReleaseNotes>
     <PackageReleaseNotes Condition=" '$(VersionSuffix)' == '' ">https://github.com/EaseLibrary/Ease/releases/tag/v$(VersionPrefix)</PackageReleaseNotes>
